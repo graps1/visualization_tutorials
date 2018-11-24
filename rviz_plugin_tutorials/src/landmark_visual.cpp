@@ -3,7 +3,8 @@
 #include <OGRE/OgreSceneNode.h>
 #include <OGRE/OgreSceneManager.h>
 
-#include <rviz/ogre_helpers/arrow.h>
+#include <tf2/LinearMath/Quaternion.h>
+#include <rviz/ogre_helpers/shape.h>
 #include "landmark_visual.h"
 
 namespace rviz_plugin_tutorials {
@@ -11,7 +12,7 @@ namespace rviz_plugin_tutorials {
     LandmarkVisual::LandmarkVisual( Ogre::SceneManager* scene_manager, Ogre::SceneNode* parent_node ) {
         scene_manager_ = scene_manager;
         frame_node_ = parent_node->createChildSceneNode();
-        acceleration_arrow_.reset(new rviz::Arrow( scene_manager_, frame_node_ ));
+        shape_.reset(new rviz::Shape( rviz::Shape::Cone, scene_manager_, frame_node_ ));
     }
 
     LandmarkVisual::~LandmarkVisual() {
@@ -21,11 +22,20 @@ namespace rviz_plugin_tutorials {
     void LandmarkVisual::setMessage(const efr_msgs::Landmark::ConstPtr& msg) {
         const geometry_msgs::Point& a = msg->position;
 
+        //RIGHT Cone
+        if (msg->type.data == 1) {
+            setColor(0,0,1,1);
+        } 
+        //LEFT Cone
+        else if (msg->type.data == 2) {
+            setColor(1,1,0,1);
+        }
+
         // resources: https://github.com/team-vigir/vigir_rviz/tree/master/src/rviz/ogre_helpers
-        Ogre::Vector3 p( a.x, a.y, a.z );
-        acceleration_arrow_->setPosition( p );
-        acceleration_arrow_->setDirection(Ogre::Vector3(0,0,1));
-        acceleration_arrow_->setScale(Ogre::Vector3(1,1,1));
+        Ogre::Vector3 p( a.x, a.y, a.z + 0.14);
+        shape_->setPosition( p );
+        shape_->setOrientation(Ogre::Quaternion(.707,.707,0,0));
+        shape_->setScale(Ogre::Vector3(0.3,0.5,0.3));
     }
 
     void LandmarkVisual::setFramePosition(const Ogre::Vector3& position) {
@@ -37,7 +47,7 @@ namespace rviz_plugin_tutorials {
     }
 
     void LandmarkVisual::setColor(float r, float g, float b, float a) {
-        acceleration_arrow_->setColor(r,g,b,a);
+        shape_->setColor(r,g,b,a);
     }
 
 }

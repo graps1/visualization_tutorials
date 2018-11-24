@@ -9,7 +9,7 @@ namespace Ogre {
 }
 
 namespace rviz {
-    class Arrow;
+    class Shape;
 }
 
 namespace rviz_plugin_tutorials {
@@ -23,7 +23,7 @@ namespace rviz_plugin_tutorials {
             void setFrameOrientation(const Ogre::Quaternion& orientation);
             void setColor(float r, float g, float b, float a);
         private:
-            boost::shared_ptr<rviz::Arrow> acceleration_arrow_;
+            boost::shared_ptr<rviz::Shape> shape_;
             Ogre::SceneNode* frame_node_;
             Ogre::SceneManager* scene_manager_;
     };    

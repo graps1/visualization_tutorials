@@ -1,4 +1,4 @@
-<library path="lib/librviz_plugin_tutorials">
+<library path="librviz_plugin_tutorials">
   <class name="rviz_plugin_tutorials/Teleop"
          type="rviz_plugin_tutorials::TeleopPanel"
          base_class_type="rviz::Panel">
@@ -21,4 +21,21 @@
       Tool for planting flags on the ground plane in rviz.
     </description>
   </class>
+  <class  name="rviz_plugin_tutorials/Landmark"
+          type="rviz_plugin_tutorials::LandmarkDisplay"
+          base_class_type="rviz::Display">
+    <description>
+      Displays Landmark-Messages
+    </description>
+    <message_type>efr_msgs/Landmark</message_type>
+  </class>
+  <class  name="rviz_plugin_tutorials/StampedLandmarkLIst"
+          type="rviz_plugin_tutorials::StampedLandmarkListDisplay"
+          base_class_type="rviz::Display">
+    <description>
+      Displays StampedLandmarkList-Messages
+    </description>
+    <message_type>efr_msgs/StampedLandmarkList</message_type>
+  </class>
 </library>
+

@@ -5,7 +5,7 @@
 ## First start with some standard catkin stuff.
 cmake_minimum_required(VERSION 2.8.3)
 project(rviz_plugin_tutorials)
-find_package(catkin REQUIRED COMPONENTS rviz)
+find_package(catkin REQUIRED COMPONENTS rviz efr_msgs)
 catkin_package()
 include_directories(${catkin_INCLUDE_DIRS})
 link_directories(${catkin_LIBRARY_DIRS})
@@ -34,11 +34,16 @@ add_definitions(-DQT_NO_KEYWORDS)
 ## Here we specify the list of source files.
 ## The generated MOC files are included automatically as headers.
 set(SRC_FILES
+
+  src/stamped_landmark_list_display.cpp
+  src/landmark_display.cpp
+  src/landmark_visual.cpp
   src/drive_widget.cpp
   src/imu_display.cpp
   src/imu_visual.cpp
   src/plant_flag_tool.cpp
   src/teleop_panel.cpp
+
 )
 
 ## An rviz plugin is just a shared library, so here we declare the
